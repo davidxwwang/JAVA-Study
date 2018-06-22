@@ -1,3 +1,4 @@
+/*
 package com.example.demo;
 
 import org.springframework.context.annotation.Bean;
@@ -18,14 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
-@Configuration
+//@Configuration
 public class WebConfiguration {
-    @Bean
+//    @Bean
     public RemoteIpFilter remoteIpFilter() {
         return new RemoteIpFilter();
     }
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean testFilterRegistration() {
 
         FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -60,3 +61,4 @@ public class WebConfiguration {
         }
     }
 }
+*/

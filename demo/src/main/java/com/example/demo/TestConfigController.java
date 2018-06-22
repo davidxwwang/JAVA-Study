@@ -10,10 +10,20 @@ public class TestConfigController {
     @Autowired
     private MyConfig myConfig;
 
+    @Autowired
+    private DavidProperties davidProperties;
+
    // @RequestMapping("/config")
     @GetMapping(value = "/config")
     public Object getConfig() {
         return myConfig.getServers();
+    }
+
+
+    // @RequestMapping("/config")
+    @GetMapping(value = "/david")
+    public Object getDavidConfig() {
+        return davidProperties.getDescription();
     }
 }
 
