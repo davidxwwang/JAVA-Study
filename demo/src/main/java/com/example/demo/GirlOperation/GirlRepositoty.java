@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.GirlOperation;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +19,8 @@ public interface GirlRepositoty extends JpaRepository<Girl,Integer> {
 //    //分页
     public Page<Girl> findByAge(Integer age, Pageable pageable);
 //
+
+    public void deleteGirlByAge(Integer age);
 
 
 }

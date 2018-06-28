@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.GirlOperation;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

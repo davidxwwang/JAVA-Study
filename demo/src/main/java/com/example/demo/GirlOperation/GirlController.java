@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.GirlOperation;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-import javax.servlet.Servlet;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -51,6 +49,7 @@ public class GirlController {
     // 根据年龄查找女生
     @GetMapping(value = "/girls/girl/{age}")
     public List<Girl> girlsFindByAge(@PathVariable("age") Integer age){
+
         return girlRepositoty.findByAge(age);
     }
 
