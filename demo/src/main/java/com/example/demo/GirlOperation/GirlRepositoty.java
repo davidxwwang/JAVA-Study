@@ -13,6 +13,8 @@ public interface GirlRepositoty extends JpaRepository<Girl,Integer> {
     //通过年龄来查询
     public List<Girl> findByAge(Integer age);
 
+    public Girl findByGirlID(Long id);
+
     public List<Girl> findByAgeAndEmail(Integer age, String email);
 
 
@@ -21,6 +23,8 @@ public interface GirlRepositoty extends JpaRepository<Girl,Integer> {
 //
 
     public void deleteGirlByAge(Integer age);
+
+    public void deleteGirlByGirlID(Integer id);
 
 
 }

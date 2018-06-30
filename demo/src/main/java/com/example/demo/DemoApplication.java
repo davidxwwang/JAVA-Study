@@ -19,21 +19,21 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 //@ComponentScan  //扫描组件 @ComponentScan(value = "com.spriboot.controller") 配置扫描组件的路径
 @MapperScan("com.example.demo.mybatis")
 //@EnableScheduling
-//public class DemoApplication extends SpringBootServletInitializer {
-//    @Override
-//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-//        return application.sources(DemoApplication.class);
-//    }
-//
-//    public static void main(String[] args) throws Exception {
-//        SpringApplication.run(DemoApplication.class, args);
-//    }
-//}
-
-public class DemoApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+public class DemoApplication extends SpringBootServletInitializer {
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(DemoApplication.class);
     }
 
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 }
+
+//public class DemoApplication {
+//
+//    public static void main(String[] args) {
+//        SpringApplication.run(DemoApplication.class, args);
+//    }
+//
+//}

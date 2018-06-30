@@ -25,10 +25,10 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping("/add")
-    public void save(UserEntity user){
-        userMapper.insert(user);
-    }
+//    @RequestMapping("/add")
+//    public void save(UserEntity user){
+//        userMapper.insert(user);
+//    }
 
     @RequestMapping("/update")
     public void update(UserEntity user){

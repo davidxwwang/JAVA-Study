@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.PageRequest;
 
-@RestController
+//@RestController
 public class GirlController {
 
 
