@@ -15,6 +15,7 @@ public interface GirlRepositoty extends JpaRepository<Girl,Integer> {
 
     public Girl findByGirlID(Long id);
 
+
     public List<Girl> findByAgeAndEmail(Integer age, String email);
 
 

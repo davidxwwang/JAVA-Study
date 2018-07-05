@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 public class UserController {
     @Autowired
-    private UserMapper userMapper;
+    private UserMapperXML userMapper;
 
     @RequestMapping("/getUsers")
     public List<UserEntity> getUsers(){

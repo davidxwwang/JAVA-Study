@@ -1,11 +1,13 @@
 package com.example.demo.GirlOperation;
 
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -41,10 +43,10 @@ public class GirlController {
     }
 
     // 根据id查找女生
-//    @GetMapping(value = "/girls/{id}")
-//    public List<Girl> girlFindOne(@PathVariable("id") Integer id){
-//        return girlRepositoty.findOne(id);
-//    }
+    @GetMapping(value = "/girls/{id}")
+    public Girl girlFindOne(@PathVariable("id") Integer id){
+       return girlRepositoty.findById(id).get();
+    }
 
     // 根据年龄查找女生
     @GetMapping(value = "/girls/girl/{age}")
