@@ -23,6 +23,9 @@ public class StringRedisTemplateDemo {
     public String env(@PathVariable("value") String para) throws Exception{
         redisClient.opsForValue().set("testenv" ,para);
         String str = redisClient.opsForValue().get("testenv");
+
+        redisClient.convertAndSend("news","this is new world!");
+
         return str;
 
     }

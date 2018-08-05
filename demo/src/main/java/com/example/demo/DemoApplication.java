@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.DesignPattern.AbstractFactory.Color;
+import com.example.demo.DesignPattern.AbstractfactoryImp;
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.AbstractHttp11Protocol;
 import org.springframework.boot.SpringApplication;
@@ -7,19 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.mybatis.spring.annotation.MapperScan;
 
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.EnableScheduling;
-
-
-
 
 
 @SpringBootApplication  //等同于 @ComponentScan、@Configuration和@EnableAutoConfiguration
@@ -32,7 +24,21 @@ public class DemoApplication extends SpringBootServletInitializer {
 //        return application.sources(DemoApplication.class);
 //    }
 
+
     public static void main(String[] args) throws Exception {
+
+
+        /*************************抽象工厂方式 ****************/
+        // 工厂是抽象的 ，产品也是抽象的
+
+        AbstractfactoryImp factory = new AbstractfactoryImp() ;
+        //生成具体的工厂
+        Color color = factory.generateColor("REDCOLOR");
+        //生成具体产品
+        color.fillWithColor();
+
+        /*****************************************/
+
         SpringApplication.run(DemoApplication.class, args);
     }
 
