@@ -1,5 +1,5 @@
 
-package com.example.demo;
+package com.example.demo.WebInterceptorFilter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,14 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 
-//@Configuration
+@Configuration
 public class WebConfiguration {
-//    @Bean
+    @Bean
     public RemoteIpFilter remoteIpFilter() {
         return new RemoteIpFilter();
     }
 
-//    @Bean
+    @Bean
     public FilterRegistrationBean testFilterRegistration() {
 
         FilterRegistrationBean registration = new FilterRegistrationBean();
