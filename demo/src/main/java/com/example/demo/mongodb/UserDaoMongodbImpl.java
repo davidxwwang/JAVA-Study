@@ -11,6 +11,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserDaoMongodbImpl implements UserDaoMongodb {
+    @Override
+    public void deleteUserById(Long id) {
+
+    }
 
     @Autowired
     private MongoTemplate mongoTemplate;
@@ -42,8 +46,10 @@ public class UserDaoMongodbImpl implements UserDaoMongodb {
     }
 
     @Override
-    public void deleteUserById(Long id) {
-        Query query=new Query(Criteria.where("id").is(id));
-        mongoTemplate.remove(query,UserEntity.class);
+    public UserEntityMongodb findUserByUserId(Long userId) {
+        Query query=new Query(Criteria.where("id").is(userId));
+        UserEntityMongodb user =  mongoTemplate.findOne(query , UserEntityMongodb.class);
+        return user;
     }
+
 }

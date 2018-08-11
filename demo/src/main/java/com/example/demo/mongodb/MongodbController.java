@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.Min;
+
 @RestController
 public class MongodbController {
 
@@ -19,7 +21,7 @@ public class MongodbController {
     private String passWord;
 
     @GetMapping(value = "/saveUser2Mongodb/{id}/{userName}/{passWord}")
-    public void saveUser(@PathVariable("id") Long id,
+    public String saveUser(@PathVariable("id") Long id,
                          @PathVariable("userName") String userName,
                          @PathVariable("passWord") String passWord) {
 
@@ -28,6 +30,17 @@ public class MongodbController {
         userEntity.setUserName(userName);
         userEntity.setPassWord(passWord);
         userDaoMongodbImpl.saveUser(userEntity);
+        return "david";
+
+
+    }
+
+
+    @GetMapping(value = "/getDateById/{id}")
+    public UserEntityMongodb saveUser(@PathVariable("id") Long id) {
+
+        UserEntityMongodb userEntity = userDaoMongodbImpl.findUserByUserId(id);
+        return userEntity;
 
     }
 

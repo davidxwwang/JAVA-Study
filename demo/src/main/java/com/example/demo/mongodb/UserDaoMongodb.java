@@ -10,4 +10,6 @@ public interface UserDaoMongodb {
     public int updateUser(UserEntityMongodb user);
 
     public void deleteUserById(Long id);
+
+    public UserEntityMongodb findUserByUserId(Long userId);
 }
