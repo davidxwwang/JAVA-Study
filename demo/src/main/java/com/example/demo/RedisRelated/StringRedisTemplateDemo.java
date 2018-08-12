@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.RedisRelated;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class StringRedisTemplateDemo {
         redisClient.opsForValue().set("testenv" ,para);
         String str = redisClient.opsForValue().get("testenv");
 
-        redisClient.convertAndSend("news","this is new world!");
+        redisClient.convertAndSend("news",str);
 
         return str;
 
