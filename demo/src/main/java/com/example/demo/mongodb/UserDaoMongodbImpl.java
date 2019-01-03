@@ -48,7 +48,9 @@ public class UserDaoMongodbImpl implements UserDaoMongodb {
     @Override
     public UserEntityMongodb findUserByUserId(Long userId) {
         Query query=new Query(Criteria.where("id").is(userId));
-        UserEntityMongodb user =  mongoTemplate.findOne(query , UserEntityMongodb.class);
+        UserEntityMongodb user = mongoTemplate.findById(userId ,UserEntityMongodb.class
+        );
+                //mongoTemplate.findOne(query , UserEntityMongodb.class);
         return user;
     }
 

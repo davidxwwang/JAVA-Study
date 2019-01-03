@@ -1,4 +1,4 @@
-package com.example.demo.DesignPattern;
+package com.example.demo.DesignPattern.AbstractFactory;
 
 import com.example.demo.DesignPattern.AbstractFactory.AbstractFactory;
 import com.example.demo.DesignPattern.AbstractFactory.Color;

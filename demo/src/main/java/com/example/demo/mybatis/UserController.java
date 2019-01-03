@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -14,7 +16,8 @@ public class UserController {
     private UserMapperXML userMapper;
 
     @RequestMapping("/getUsers")
-    public List<UserEntity> getUsers(){
+    public List<UserEntity> getUsers(HttpServletRequest request){
+        HttpSession session = request.getSession();
         List<UserEntity> users = userMapper.getAll();
         return users;
     }

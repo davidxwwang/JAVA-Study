@@ -1,9 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.DesignPattern.AbstractFactory.Color;
-import com.example.demo.DesignPattern.AbstractfactoryImp;
+import com.example.demo.DesignPattern.AbstractFactory.AbstractfactoryImp;
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.AbstractHttp11Protocol;
+import org.apache.logging.log4j.spi.AbstractLogger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.mybatis.spring.annotation.MapperScan;
@@ -12,6 +13,8 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+
+//import com.example.demo.ResponsibilityChain.ChainPatternDemo;
 
 
 @SpringBootApplication  //等同于 @ComponentScan、@Configuration和@EnableAutoConfiguration
@@ -38,6 +41,9 @@ public class DemoApplication extends SpringBootServletInitializer {
         color.fillWithColor();
 
         /*****************************************/
+
+//        com.example.demo.ResponsibilityChain.ChainPatternDemo.AbstractLogger logger = com.example.demo.ResponsibilityChain.ChainPatternDemo.getChainOfLoggers();
+//        logger.log(com.example.demo.ResponsibilityChain.AbstractLogger.INFO,"david");
 
         SpringApplication.run(DemoApplication.class, args);
     }
