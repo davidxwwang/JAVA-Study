@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FilterChain {
+public final class FilterChain {
+
+    public static final int MAXINCREAMENT = 8;
 
     private Integer currentExcuteFilterIndex = 0;
 
@@ -20,7 +22,7 @@ public class FilterChain {
      * @return
      */
     public static FilterChain configWithYML(String path, String section) throws FilterChainException, IllegalAccessException, InstantiationException {
-
+        
         FilterChain chain = new FilterChain();
 
         YamlMapFactoryBean yamlMapFactoryBean = new YamlMapFactoryBean();
@@ -29,8 +31,6 @@ public class FilterChain {
         Map<String, Object> map = yamlMapFactoryBean.getObject();
 
         List<String> classNameList = (List<String>) map.get(section);
-
-        chain.filters.clear();
         for (String className : classNameList){
             Class clazz = null;
             try{
@@ -62,12 +62,34 @@ public class FilterChain {
         }
 
         FilterInterFace filterInterFace = filters.get(currentExcuteFilterIndex);
-        filterInterFace.dofilter(context);
+        filterInterFace.dofilter(context, this);
 
         currentExcuteFilterIndex++;
     }
 
 
+    private void addFilter(FilterInterFace filter){
 
+        for (FilterInterFace each : this.filters){
+            if (filter == each){
+                return;
+            }
+        }
 
+        Integer filterArraySize = this.filters.size();
+        if(currentExcuteFilterIndex == filterArraySize){
+            List<FilterInterFace> newFilters = new ArrayList<>(filterArraySize + MAXINCREAMENT);
+            for (FilterInterFace eachFilter : this.filters){
+                newFilters.add(eachFilter);
+            }
+
+            newFilters.add(filter);
+            this.filters = newFilters;
+        }
+    }
+
+    private void release(){
+        this.filters.clear();
+        currentExcuteFilterIndex = 0;
+    }
 }
