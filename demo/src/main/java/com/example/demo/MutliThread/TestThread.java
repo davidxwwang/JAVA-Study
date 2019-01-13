@@ -21,10 +21,26 @@ package com.example.demo.MutliThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.ArrayBlockingQueue;
+
 public class TestThread {
     public static void main(String[] args) {
-
         Logger logger = LoggerFactory.getLogger("TestThread");
+
+        ArrayBlockingQueue queue =  new ArrayBlockingQueue<Runnable>(2);
+
+        for (int i = 0; i< 5; i++) {
+            Thread thread = new Thread();
+            try {
+                queue.take();
+                queue.put(thread);
+            } catch (InterruptedException ex) {
+                logger.info("david " + ex.toString());
+
+            }
+        }
+
+
 
         Thread thread = new Thread();
         System.out.print("state= " + thread.getState() );
@@ -65,7 +81,7 @@ public class TestThread {
                 synchronized (lock){
                     logger.info("{} invoke",Thread.currentThread());
                     try{
-                        wait();
+//                        wait();
                         Thread.sleep(2000L);
                     }catch (InterruptedException ex){
                         ex.printStackTrace();
