@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@Component
+/**
+ * 拦截器
+ */
 public class LogInterceptor implements HandlerInterceptor {
 
     static Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
@@ -23,7 +25,7 @@ public class LogInterceptor implements HandlerInterceptor {
       //  String xx = request.getHeader();
         HttpSession session = request.getSession();
 
-
+       // 返回true 放行
         return true;
     }
 
