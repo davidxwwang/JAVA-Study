@@ -17,7 +17,6 @@ public class ValidateTest {
         Integer i =3;
     }
 
-    @DavidValid
     public Integer doValidate(Item item){
         return 1;
     }

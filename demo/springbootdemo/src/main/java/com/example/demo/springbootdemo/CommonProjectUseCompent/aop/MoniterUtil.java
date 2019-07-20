@@ -9,14 +9,13 @@ public class MoniterUtil {
 
     private static ThreadLocal<Long> spendTime = new ThreadLocal<>();
 
-    static void  start(){
+    public static void  start(){
         spendTime.set(System.currentTimeMillis());
     }
 
-    static void finish(){
+    public static void finish(){
         Long now = System.currentTimeMillis();
         Long sessionTime = now - spendTime.get();
-
         logger.info("花去了：{} ms", sessionTime);
 
     }

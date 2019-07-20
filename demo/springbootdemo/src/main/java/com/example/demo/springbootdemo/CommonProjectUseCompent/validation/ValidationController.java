@@ -2,17 +2,25 @@ package com.example.demo.springbootdemo.CommonProjectUseCompent.validation;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.io.OutputStream;
+import java.lang.annotation.Annotation;
 import java.nio.ByteBuffer;
+import java.util.List;
 
 
 @RestController
@@ -23,36 +31,51 @@ import java.nio.ByteBuffer;
 public class ValidationController {
 
     @Resource
+    @Qualifier("item2david")
     Item2 item2;
 
     private Logger logger= LoggerFactory.getLogger(this.getClass());
 
-//    @RequestMapping("/test")
-//    public String doTest(@Validated Item item, BindingResult bindingResult){
+    @RequestMapping("/test")
+    public String doTest(@Validated Item item){
 //        if (bindingResult.hasErrors()){
 //            return bindingResult.getAllErrors().toString();
 //        }
-//        return "通过验证";
-//    }
+        return "通过验证";
+    }
 
     @RequestMapping("/testString")
     public Object testString( @NotNull(message = "name不能为null") String message) {
-//        if (bindingResult.hasErrors()){
-//            return bindingResult.getAllErrors();
-//        }
-
-       // return item2.setName(null, "32");
 
 //        ValidClass validClass = new ValidClass();
 //        return validClass.testName(null);
+        Annotation[] annotations =  this.getClass().getAnnotations();
+        for (Annotation annotation: annotations){
+            System.out.print(annotation);
+            System.out.print("\n");
+            if (annotation instanceof RequestMapping){
+                RequestMapping requestMapping = (RequestMapping)annotation;
+                logger.info("请求 {}",requestMapping.value());
 
+            }
+        }
+        return null;
+
+    }
+
+    @RequestMapping("/testPOJO")
+    public Object testPOJO(){
+        Item item = this.test(new Item());
         return test2(-1L);
-
 //        Item item = new Item();
 //        Thread currentThread = Thread.currentThread();
 //        logger.info("当前线程信息：" + Thread.currentThread().toString());
-//        return test(item);
+//        return this.test(item);
+    }
 
+    @RequestMapping("/testBean")
+    public Object testBean(){
+         return item2.setName("david", -1L);
     }
 
     private Item test(@Validated Item item){
@@ -60,7 +83,7 @@ public class ValidationController {
         return item;
     }
 
-    private Long test2(@Min(value = 0, message = "最小为0") Long id){
+    public Long test2(@Min(value = 0, message = "最小为0") Long id){
         return  id * 2;
     }
 

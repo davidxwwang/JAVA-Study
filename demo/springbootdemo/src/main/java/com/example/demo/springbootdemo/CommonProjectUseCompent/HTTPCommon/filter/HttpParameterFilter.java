@@ -1,11 +1,7 @@
 package com.example.demo.springbootdemo.CommonProjectUseCompent.HTTPCommon.filter;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
-import jdk.management.resource.internal.inst.SocketInputStreamRMHooks;
-import org.apache.naming.StringManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.client.reactive.ClientHttpConnector;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -14,8 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
+
 import java.util.HashMap;
 import java.util.Map;
 

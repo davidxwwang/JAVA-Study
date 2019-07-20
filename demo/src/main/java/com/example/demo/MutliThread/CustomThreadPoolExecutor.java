@@ -2,8 +2,7 @@ package com.example.demo.MutliThread;
 
 import com.sun.tools.javac.util.ByteBuffer;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -25,12 +24,12 @@ public class CustomThreadPoolExecutor {
      * workQueue 阻塞队列----new ArrayBlockingQueue<Runnable>(5)====5容量的阻塞队列
      * threadFactory 新建线程工厂----new CustomThreadFactory()====定制的线程工厂
      * rejectedExecutionHandler 当提交任务数超过maxmumPoolSize+workQueue之和时,
-     * 							即当提交第41个任务时(前面线程都没有执行完,此测试方法中用sleep(100)),
+     * 							即当提交第26个任务时(前面线程都没有执行完,此测试方法中用sleep(100)),
      * 						          任务会交给RejectedExecutionHandler来处理
      */
 
     /**
-     * 方法中建立一个核心线程数为10个，缓冲队列有5个的线程池。每个线程任务，
+     * 方法中建立一个核心线程数为10个，缓冲队列容量为5个线程任务，
      * 执行时会先睡眠3秒，保证提交10任务时，线程数目被占用完，
      * 再提交5个任务时，会把5个任务加到阻塞队列
      * 再提交20个任务时，线程池新增20个线程，这时到了30（maximumPoolSize），自此以后提交的任务都被拒绝了

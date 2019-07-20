@@ -32,6 +32,7 @@ public class DavidHttpFilter extends OncePerRequestFilter {
         String demo2 = new String(bytes, Charset.forName("UTF-8"));
 
         httpServletResponse.getOutputStream().write(bytes);
+        httpServletResponse.setContentLength(100);
 
         logger.info("过滤器 after {} is 调用 ",this.getClass());
     }

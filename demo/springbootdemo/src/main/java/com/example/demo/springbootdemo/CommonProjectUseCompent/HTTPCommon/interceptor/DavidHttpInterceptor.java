@@ -29,13 +29,14 @@ public class DavidHttpInterceptor implements HandlerInterceptor {
                 byte[] b = failStr.getBytes("UTF-8");
                 response.getOutputStream().write(b);
                 response.setContentType("UTF-8");
+                response.setContentLength(100);
                // response.getWriter().print(b);
             } catch (UnsupportedEncodingException ex){
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return false;
+            return true;
         }
         return true;
     }

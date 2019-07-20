@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PersonMapper">
+
+    <sql id="table_name">david_table1</sql>
+
+    <sql id="insert_column_list">name,home_town,sex,height</sql>
+    <sql id="insert_column_value">#{name},#{home_town},#{sex},#{height}</sql>
+
+    <sql id="select_column_list">
+        id,name,home_town,sex,height
+    </sql>
+
+    <select id = "getPersonById" parameterType="java.lang.Long" resultType="PersonDO">
+        select <include refid="select_column_list"></include> from <include refid="table_name"></include> where id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="PersonDO"
+            keyProperty="id" useGeneratedKeys="true">
+        insert <include refid="table_name"></include> (<include refid="insert_column_list"></include>)
+        values (<include refid="insert_column_value"></include>)
+    </insert>
+
+    <insert id="batchUpsert">
+        insert <include refid="table_name"></include> (<include refid="insert_column_list"></include>)
+            values
+                <foreach item="item" collection="personList" separator="," >
+                    ( #{item.name}, #{item.home_town}, #{item.sex}, #{item.height} )
+                </foreach>
+            on DUPLICATE key update
+                name = values(name), home_town = values(home_town),
+                sex = values(sex),height = values(height)
+    </insert>
+
+
+</mapper>
