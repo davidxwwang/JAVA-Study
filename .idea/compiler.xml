@@ -14,14 +14,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="davidtest" target="1.8" />
       <module name="demo" target="1.8" />
       <module name="demo (1)" target="1.8" />
-      <module name="javafeatures" target="1.5" />
+      <module name="javafeatures" target="1.8" />
       <module name="rpcdemo" target="1.8" />
       <module name="springbootdemo" target="1.8" />
       <module name="storage" target="1.8" />
-      <module name="test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
