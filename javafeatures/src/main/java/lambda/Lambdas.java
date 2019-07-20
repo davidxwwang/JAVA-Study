@@ -3,11 +3,14 @@ package lambda;
 import demos.PersonDTO;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.*;
 
+/**
+ * 就是匿名方法
+ */
 public class Lambdas {
-
 
     /**
      * 过滤，判断
@@ -31,6 +34,23 @@ public class Lambdas {
      * 计算，会返回数据
      */
     static void testFunction(){
+
+
+        Function<PersonDTO, HashMap<String,Object>> function0 = (a)->{
+            HashMap<String,Object> x = new HashMap<>();
+            x.put("key",a.getGander());
+            x.put("key2",a.getGander());
+            x.put("key3",a.getName());
+            return x;
+        };
+
+        PersonDTO personDTO = new PersonDTO();
+        personDTO.setName("david");
+        personDTO.setHometown("lanzhou");
+        personDTO.setGander(1);
+        HashMap<String,Object> hashMap = function0.apply(personDTO);
+
+
         BiFunction<Integer, Integer, Integer> function = (a,b)->{ return 10*a+b;};
 
         // 结果是  46;
@@ -81,6 +101,22 @@ public class Lambdas {
         System.out.print("");
     }
 
+    /**
+     * 聚合 stream
+     */
+    static void testReduce(){
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        // 结果是 21（numbers的累加和）+ reduce中的 identity值
+        int result = numbers
+                .stream()
+                .reduce(0, (subtotal, element) -> subtotal -element);
+
+        System.out.print("");
+
+      //  assertThat(result).isEqualTo(21);
+    }
+
     public static void main(String[] args){
 
        testPredicate();
@@ -90,6 +126,8 @@ public class Lambdas {
        testConsumer();
 
        testSupplier();
+
+       testReduce();
 
     }
 
