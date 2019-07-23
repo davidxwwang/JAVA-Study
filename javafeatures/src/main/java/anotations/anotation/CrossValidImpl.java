@@ -1,6 +1,6 @@
 package anotations.anotation;
 
-import demos.OrderCrossReqDTO;
+import dtoObject.OrderCrossReqDTO;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

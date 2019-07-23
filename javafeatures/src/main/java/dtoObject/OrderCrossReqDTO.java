@@ -1,4 +1,4 @@
-package demos;
+package dtoObject;
 
 import anotations.anotation.CrossValid;
 import lombok.Data;

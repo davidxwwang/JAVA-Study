@@ -1,6 +1,6 @@
 package lambda;
 
-import demos.PersonDTO;
+import dtoObject.PersonDTO;
 
 import java.util.*;
 import java.util.function.Function;
