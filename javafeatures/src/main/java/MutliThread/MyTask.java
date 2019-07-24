@@ -32,7 +32,7 @@ public class MyTask implements Runnable {
 
         Long end = System.currentTimeMillis();
 
-        Supplier<String> time  = () -> {return (begin - end) + "ms";};
+        Supplier<String> time  = () -> {return (end - begin) + "ms";};
         costTime = time.get();
 
         System.out.println(taskId +  "在线程<<<" +  threadName + ">>>运行，花费了" + costTime + " ||现在任务结束了" );

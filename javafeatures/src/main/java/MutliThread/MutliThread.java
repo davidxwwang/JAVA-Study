@@ -3,6 +3,7 @@ package MutliThread;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
 import java.util.concurrent.*;
 
 public  class MutliThread {
@@ -14,19 +15,30 @@ public  class MutliThread {
         exec.init();
 
         ExecutorService pool = exec.getCustomThreadPoolExecutor();
-        for(int i=1; i<100; i++) {
-           // System.out.println("提交第" + i + "个任务!");  // 提交100个任务
-
+        for(int i=1; i<101; i++) {
             MyTask task = new MyTask();
             task.setTaskId("第" + i + "号任务");
+
             pool.execute(task);
         }
 
         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) exec.getCustomThreadPoolExecutor();
+        System.out.print("\n统计下数据" + new Date());
+
+        // todo 为什么这个方法被block了,这里要好好的理解下 为什么获得是68/67，我非常的不能理解
         long finished = threadPoolExecutor.getCompletedTaskCount();
-        System.out.print("完成了" + finished + "个任务");
+        System.out.print("\n共完成了" + finished + "个任务 " + new Date());
          //2.销毁----此处不能销毁,因为任务没有提交执行完,如果销毁线程池,任务也就无法执行了，结束了
-        // exec.destory();
+         exec.destory();
+
+
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        long finished2 = threadPoolExecutor.getCompletedTaskCount();
 
         while (true);
 

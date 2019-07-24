@@ -1,5 +1,6 @@
 package MutliThread;
 
+import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -9,6 +10,8 @@ public class CustomThreadPoolExecutor {
 
 
     private ThreadPoolExecutor pool = null;
+
+    private AtomicInteger finished = new AtomicInteger(0);
 
 
     /**
@@ -40,7 +43,16 @@ public class CustomThreadPoolExecutor {
          * 如果每个任务执行的时间都够久，那么从第36个任务开始，就会被拒绝（30个最大线程 + 5个queue的容量）
          *      当然，先生成10个线程，再入5个ArrayBlockingQueue，再生成20个线程
          */
-        pool = new ThreadPoolExecutor(
+//        pool = new ThreadPoolExecutor(
+//                10,
+//                30,
+//                3,
+//                TimeUnit.SECONDS,
+//                new ArrayBlockingQueue<Runnable>(5),
+//                new CustomThreadFactory(),
+//                new CustomRejectedExecutionHandler());
+
+        pool = new MyCustomThreadPoolExcutor(
                 10,
                 30,
                 3,
@@ -48,6 +60,8 @@ public class CustomThreadPoolExecutor {
                 new ArrayBlockingQueue<Runnable>(5),
                 new CustomThreadFactory(),
                 new CustomRejectedExecutionHandler());
+
+
     }
 
 
@@ -60,6 +74,53 @@ public class CustomThreadPoolExecutor {
 
     public ExecutorService getCustomThreadPoolExecutor() {
         return this.pool;
+    }
+
+    private class MyCustomThreadPoolExcutor extends ThreadPoolExecutor{
+
+        public MyCustomThreadPoolExcutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, RejectedExecutionHandler handler) {
+            super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue, threadFactory, handler);
+        }
+
+
+        // hook 方法
+        @Override
+        protected void afterExecute(Runnable r, Throwable t) {
+            finished.addAndGet(1);
+
+            System.out.print( "\n现在有" + finished.get() + "个任务执行结束\n");
+
+            MyTask task = (MyTask)r;
+            String taskId = task.getTaskId();
+            System.out.print( "\n" + taskId + "已经执行结束\n");
+
+            super.afterExecute(r, t);
+        }
+
+        @Override
+        public List<Runnable> shutdownNow() {
+
+            System.out.print( "shutdownNow");
+            return super.shutdownNow();
+        }
+
+        @Override
+        protected void beforeExecute(Thread t, Runnable r) {
+
+            MyTask task = (MyTask)r;
+            String taskId = task.getTaskId();
+            System.out.print( "\n" + taskId + "即将开始执行\n");
+
+            super.beforeExecute(t, r);
+        }
+
+
+        @Override
+        protected void terminated() {
+
+            System.out.print("all over！！");
+            super.terminated();
+        }
     }
 
     private class CustomThreadFactory implements ThreadFactory {

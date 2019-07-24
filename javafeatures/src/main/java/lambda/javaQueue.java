@@ -3,13 +3,41 @@ package lambda;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 public class javaQueue {
 
+    /**
+     * 无界blockedQueue
+     */
+    static void testUnboundQueue(){
 
-    static void testQueue(){
-        ArrayBlockingQueue queue =  new ArrayBlockingQueue(1);
+        LinkedBlockingQueue unboundBlockQueue = new LinkedBlockingQueue(1);
+
+        // offer()方法不会阻塞当前线程，如果满了，当即就返回false
+        boolean isOK_0 = unboundBlockQueue.offer("元素1");
+        boolean isOK_1 = unboundBlockQueue.offer("元素2");
+        boolean isOK_2 = unboundBlockQueue.offer("元素3");
+
+
+//        try {
+//            // put()方法会阻塞当前线程
+//            unboundBlockQueue.put("元素1");
+//            unboundBlockQueue.put("元素2");
+//            unboundBlockQueue.put("元素3");
+//
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+    }
+
+    /**
+     * 有界blockedQueue
+     */
+    static void testBoundQueue(){
+        ArrayBlockingQueue boundBlockQueue =  new ArrayBlockingQueue(1);
         try {
             Thread thread = new Thread(new Runnable() {
                 @Override
@@ -19,7 +47,7 @@ public class javaQueue {
 
                         Thread.sleep(1000,1);
                         System.out.print("step in thread----1\n");
-                        String e = (String) queue.take();
+                        String e = (String) boundBlockQueue.take();
 
                         System.out.print("before hello world:" + e + "\n\n");
                     } catch (InterruptedException e) {
@@ -28,13 +56,14 @@ public class javaQueue {
                 }
             });
 
-            queue.put("元素1");
+            // todo put()方法会阻塞
+            boundBlockQueue.put("元素1");
             System.out.print("step0\n");
 
             thread.start();
             System.out.print("step1\n");
 
-            queue.put("元素2");
+            boundBlockQueue.put("元素2");
             System.out.print("step2\n");
 
 
@@ -59,6 +88,8 @@ public class javaQueue {
 
     public static void main(String[] args) {
 
-        testQueue();
+        testUnboundQueue();
+
+       // testBoundQueue();
     }
 }
