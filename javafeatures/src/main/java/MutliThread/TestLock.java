@@ -1,4 +1,4 @@
-package com.example.demo.MutliThread;
+package MutliThread;
 
 import java.util.HashMap;
 

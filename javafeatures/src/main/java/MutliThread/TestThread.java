@@ -16,7 +16,7 @@
 
 //  https://fangjian0423.github.io/2016/06/04/java-thread-state/
 
-package com.example.demo.MutliThread;
+package MutliThread;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +24,11 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class TestThread {
-    public static void main(String[] args) {
-        Logger logger = LoggerFactory.getLogger("TestThread");
+
+    static Logger logger = LoggerFactory.getLogger("TestThread");
+
+
+    static public void testThread(){
 
         ArrayBlockingQueue queue =  new ArrayBlockingQueue<Runnable>(2);
 
@@ -36,10 +39,8 @@ public class TestThread {
                 queue.put(thread);
             } catch (InterruptedException ex) {
                 logger.info("david " + ex.toString());
-
             }
         }
-
 
 
         Thread thread = new Thread();
@@ -47,7 +48,6 @@ public class TestThread {
 
 
         Thread thread1 = new Thread(new Runnable() {
-            @Override
             public void run() {
                 // 任务一结束，线程马上就 TERMINATED
                 System.out.print(Thread.currentThread() + " is running" );
@@ -76,7 +76,6 @@ public class TestThread {
 
         final Object lock = new Object();
         Thread thread3 = new Thread(new Runnable() {
-            @Override
             public void run() {
                 synchronized (lock){
                     logger.info("{} invoke",Thread.currentThread());
@@ -92,7 +91,6 @@ public class TestThread {
         }, "BLOCKED -Thread-3");
 
         Thread thread4 = new Thread(new Runnable() {
-            @Override
             public void run() {
                 synchronized (lock){
                     logger.info("{} invoke",Thread.currentThread());
@@ -109,18 +107,21 @@ public class TestThread {
         thread3.start();
         thread4.start();
 
-
-
         System.out.print("state= " + thread3.getState() );
         System.out.print("state= " + thread4.getState() );
         logger.info("thread3 invoke state= {}",thread3.getState());
         // thread4 in "blocked" A thread that is blocked waiting for a monitor lock is in this state.
         logger.info("thread4 invoke state= {}",thread4.getState());
 
-
-
-
         System.out.print("state= " + thread.getState() );
+
+    }
+
+
+    public static void main(String[] args) {
+
+        testThread();
+
 
     }
 }

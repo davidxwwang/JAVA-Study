@@ -1,8 +1,5 @@
-package com.example.demo.MutliThread;
+package MutliThread;
 
-import com.sun.tools.javac.util.ByteBuffer;
-
-import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -38,11 +35,16 @@ public class CustomThreadPoolExecutor {
      *
      */
     public void init() {
+        /**
+         * maximumPoolSize被设置成了30，说明最多只能生成30个线程
+         * 如果每个任务执行的时间都够久，那么从第36个任务开始，就会被拒绝（30个最大线程 + 5个queue的容量）
+         *      当然，先生成10个线程，再入5个ArrayBlockingQueue，再生成20个线程
+         */
         pool = new ThreadPoolExecutor(
                 10,
                 30,
-                30,
-                TimeUnit.MINUTES,
+                3,
+                TimeUnit.SECONDS,
                 new ArrayBlockingQueue<Runnable>(5),
                 new CustomThreadFactory(),
                 new CustomRejectedExecutionHandler());
@@ -64,12 +66,10 @@ public class CustomThreadPoolExecutor {
 
         private AtomicInteger count = new AtomicInteger(0);
 
-        @Override
         public Thread newThread(Runnable r) {
             Thread t = new Thread(r);
-            String threadName = CustomThreadPoolExecutor.class.getSimpleName() + count.addAndGet(1);
-            System.out.println("新生成了线程，名称为：" + threadName);
-
+            String threadName = "第** " + count.addAndGet(1) + " **号线程";
+            System.out.println("新生成了第 " + count.get() + "个 线程，名称为：" + threadName);
             t.setName(threadName);
             return t;
         }
@@ -78,18 +78,20 @@ public class CustomThreadPoolExecutor {
 
     private class CustomRejectedExecutionHandler implements RejectedExecutionHandler {
 
-        @Override
+        private AtomicInteger rejectCount = new AtomicInteger(0);
+
         public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+            System.out.println("有" + rejectCount.addAndGet(1) + "个任务被拒绝");
             // 记录异常
             // 报警处理等
-            System.out.println("error.............");
 
             try {
                 // 核心改造点，由blockingqueue的offer改成put阻塞方法
                 BlockingQueue<Runnable> queue = executor.getQueue();
 
-                // 阻塞接口 put take
+                // 一直会阻塞queue，直到有空间插入为止
                 executor.getQueue().put(r);
+                System.out.print("l am here !\n");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,15 +1,12 @@
-package com.example.demo.MutliThread;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package MutliThread;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public  class MutliThread {
+
     public static void main(String[] args) {
 
         CustomThreadPoolExecutor exec = new CustomThreadPoolExecutor();
@@ -18,33 +15,20 @@ public  class MutliThread {
 
         ExecutorService pool = exec.getCustomThreadPoolExecutor();
         for(int i=1; i<100; i++) {
-            System.out.println("提交第" + i + "个任务!");
-            pool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    System.out.println(" 这是任务开始工作的地方");
-                    try {
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(" 这是任务结束工作的地方");
-                    System.out.println(Thread.currentThread().getName() +  " running=====");
-                }
-            });
+           // System.out.println("提交第" + i + "个任务!");  // 提交100个任务
+
+            MyTask task = new MyTask();
+            task.setTaskId("第" + i + "号任务");
+            pool.execute(task);
         }
 
         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) exec.getCustomThreadPoolExecutor();
+        long finished = threadPoolExecutor.getCompletedTaskCount();
+        System.out.print("完成了" + finished + "个任务");
+         //2.销毁----此处不能销毁,因为任务没有提交执行完,如果销毁线程池,任务也就无法执行了，结束了
+        // exec.destory();
 
-
-         //2.销毁----此处不能销毁,因为任务没有提交执行完,如果销毁线程池,任务也就无法执行了
-         exec.destory();
-
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        while (true);
 
 //
 //        ExecutorService pool1=Executors.newSingleThreadExecutor();
@@ -84,10 +68,6 @@ public  class MutliThread {
 //                new SynchronousQueue<Runnable>(),  //ArrayBlockingQueue
 //                new CustomThreadFactory(),
 //                new CustomRejectedExecutionHandler()));
-//
-
-        int x =3;
-        x-= 3;
 
 
     }
@@ -104,7 +84,6 @@ public  class MutliThread {
             while (true){
                 final Socket connect =socket.accept();
                 Runnable task = new Runnable() {
-                    @Override
                     public void run() {
                         handlerequest(connect);
                     }
