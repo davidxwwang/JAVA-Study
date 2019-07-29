@@ -31,6 +31,7 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+
         logger.info("请求路径：{}", request.getRequestURI());
     }
 

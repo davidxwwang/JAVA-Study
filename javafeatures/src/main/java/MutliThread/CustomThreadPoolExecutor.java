@@ -8,9 +8,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class CustomThreadPoolExecutor {
 
-
     private ThreadPoolExecutor pool = null;
 
+    // 如果使用Integer，就会乱套了！！！！
     private AtomicInteger finished = new AtomicInteger(0);
 
 
