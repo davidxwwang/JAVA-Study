@@ -10,6 +10,11 @@ import java.util.concurrent.locks.Condition;
  * AbstractQueuedSynchronizer的使用demo
  * 它的特点就使用一个int类型的数据，就可以完成同步的工作，那么像：信号量/ 多线程下的计数器/ 倒计时 都可以做了
  * // 多线程环境下的状态机也是可以的
+ *
+ *
+ *
+ *
+ * 原理： CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，
  */
 public class SubClassAbstractQueuedSynchronizer {
 

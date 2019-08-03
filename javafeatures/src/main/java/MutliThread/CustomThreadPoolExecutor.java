@@ -65,7 +65,7 @@ public class CustomThreadPoolExecutor {
     }
 
 
-    public void destory() {
+    public void shutdownNow() {
         if(pool != null) {
             pool.shutdownNow();
         }

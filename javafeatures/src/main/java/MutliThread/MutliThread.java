@@ -29,7 +29,7 @@ public  class MutliThread {
         long finished = threadPoolExecutor.getCompletedTaskCount();
         System.out.print("\n共完成了" + finished + "个任务 " + new Date());
          //2.销毁----此处不能销毁,因为任务没有提交执行完,如果销毁线程池,任务也就无法执行了，结束了
-         exec.destory();
+         exec.shutdownNow();
 
 
         try {

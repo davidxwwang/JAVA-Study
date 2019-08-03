@@ -2,7 +2,7 @@ package corcurrent;
 
 import java.util.concurrent.*;
 
-public class Taskable {
+public class Tasks {
 
     // 线程的基本测试
     static void testThread(){
@@ -72,10 +72,7 @@ public class Taskable {
 
     }
 
-
-    static void testAsynTask(){
-
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+    static void testFuturnTask(){
 
         // todo 异步任务
         FutureTask<Integer> asynTask = new FutureTask<>(() -> {
@@ -87,6 +84,13 @@ public class Taskable {
             return 1;
         });
 
+
+    }
+
+
+    static void testAsynTask(){
+
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
 
         Callable<String> callTask = ()->{
             System.out.print("提交的任务: " + System.currentTimeMillis());
