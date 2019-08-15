@@ -10,6 +10,8 @@ public  class MutliThread {
 
     public static void main(String[] args) {
 
+        int x ="".hashCode();
+
         CustomThreadPoolExecutor exec = new CustomThreadPoolExecutor();
         // 1.初始化
         exec.init();
@@ -20,7 +22,9 @@ public  class MutliThread {
             task.setTaskId("第" + i + "号任务");
 
             pool.execute(task);
+            task.setTaskId("第" + i + "号任务提交了");
         }
+        pool.shutdownNow();
 
         ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) exec.getCustomThreadPoolExecutor();
         System.out.print("\n统计下数据" + new Date());
