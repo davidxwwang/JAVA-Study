@@ -8,7 +8,10 @@
       <module fileurl="file://$PROJECT_DIR$/javafeatures/javafeatures.iml" filepath="$PROJECT_DIR$/javafeatures/javafeatures.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/rpcdemo/rpcdemo.iml" filepath="$PROJECT_DIR$/demo/rpcdemo/rpcdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/springbootdemo/springbootdemo.iml" filepath="$PROJECT_DIR$/demo/springbootdemo/springbootdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/study/start/start.iml" filepath="$PROJECT_DIR$/study/start/start.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/storage/storage.iml" filepath="$PROJECT_DIR$/demo/storage/storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/study/study.iml" filepath="$PROJECT_DIR$/study/study.iml" />
+      <module fileurl="file://$PROJECT_DIR$/study/studystart/studystart.iml" filepath="$PROJECT_DIR$/study/studystart/studystart.iml" />
     </modules>
   </component>
 </project>
